@@ -1,20 +1,4 @@
 
-// import { Navigate } from "react-router-dom";
-// import { useAuth } from "../store/authStore";
-
-// export default function ProtectedRoute({ children, allowed }) {
-//   const { token, role } = useAuth();
-
-//   if (!token) return <Navigate to="/" replace />;
-
-//   if (allowed && !allowed.includes(role)) {
-//     return <Navigate to="/" replace />;
-//   }
-
-//   return children;
-// }
-
-//===today kp====
 // components/ProtectedRoute.jsx
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../store/authStore";

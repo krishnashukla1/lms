@@ -1,0 +1,47 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ignore all env files everywhere using:
+**/.env
+**/.env.*
+
+
+# Build outputs
+dist/
+build/
+.out/
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# IDE / Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Mac / Windows
+.DS_Store
+desktop.ini
+
+# Others
+*.tgz
+*.zip
