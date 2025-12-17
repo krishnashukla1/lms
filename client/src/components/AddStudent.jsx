@@ -60,13 +60,13 @@ export default function AddStudent() {
           </button>
 
           {/* Header */}
-          <div className="bg-linear-to-r from-blue-600 to-purple-700 p-10 text-center relative pt-10">
+          <div className="bg-linear-to-r from-blue-600 to-purple-700 p-5 text-center relative pt-10">
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="relative z-10">
-              <motion.div whileHover={{ scale: 1.1 }} className="inline-block p-5 bg-white/20 backdrop-blur-xl rounded-3xl border border-white/30 mb-2">
+              <motion.div whileHover={{ scale: 1.1 }} className="inline-block p-4 bg-white/20 backdrop-blur-xl rounded-3xl border border-white/30 mb-2">
                 <FiUserPlus className="text-white text-5xl" />
               </motion.div>
-              <h1 className="text-4xl font-black text-white mb-2 tracking-tight">Add New Student</h1>
+              <h1 className="text-4xl font-black text-white tracking-tight">Add New Student</h1>
               <p className="text-lg text-blue-100">Create account and start their learning journey</p>
             </div>
           </div>
@@ -203,14 +203,11 @@ export default function AddStudent() {
             </form>
 
             {/* Tips — SMALL SIZE ✓ */}
-            <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-200/50">
-              <h3 className="font-semibold text-gray-800 mb-2 text-sm">Quick Tips</h3>
-              <ul className="text-xs text-gray-600 space-y-1">
-                <li>• Username must be unique</li>
-                <li>• Password should be 8+ characters</li>
-                <li>• Email is optional but recommended</li>
-              </ul>
-            </div>
+            <div className="mt-4 p-2 text-xs text-gray-600 bg-blue-50 rounded-lg border border-blue-200/50">
+  <span className="font-semibold text-gray-800">Quick Tips:</span>{" "}
+  Username must be unique • Password 8+ chars • Email optional
+</div>
+
 
           </div>
         </div>

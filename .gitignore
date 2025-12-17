@@ -5,6 +5,19 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+
+# Global
+node_modules/
+.env
+dist
+build
+
+# Backend specific
+backend/node_modules/
+
+# Client specific
+client/node_modules/
+
 # ignore all env files everywhere using:
 **/.env
 **/.env.*

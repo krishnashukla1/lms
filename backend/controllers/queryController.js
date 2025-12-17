@@ -6,7 +6,7 @@ dotenv.config();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM_EMAIL = "onboarding@resend.dev";
-const ADMIN_EMAIL = "backend.9developer@gmail.com";
+const ADMIN_EMAIL = "krishnaprasad24795@gmail.com";
 
 export async function sendQuery(req, res) {
   const { name, email, message } = req.body;

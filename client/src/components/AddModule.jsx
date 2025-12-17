@@ -352,7 +352,7 @@ export default function AddModule() {
           <button
             type="submit"
             disabled={loading}
-            className="cursor-pointer w-full py-6 rounded-2xl text-2xl font-bold text-white bg-gradient-to-r from-blue-600 to-purple-700 hover:shadow-2xl transition disabled:opacity-60"
+            className="cursor-pointer w-full py-4 rounded-2xl text-2xl font-bold text-white bg-gradient-to-r from-blue-600 to-purple-700 hover:shadow-2xl transition disabled:opacity-60"
           >
             {loading ? "Creating Module..." : "Create Module"}
           </button>

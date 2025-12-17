@@ -77,22 +77,73 @@ export default function QuizList() {
     q.moduleName.toLowerCase().includes(search.toLowerCase())
   );
 
+  // const handleSave = async () => {
+  //   if (!form.moduleId) return alert("Please select a module");
+
+  //   try {
+  //     await api.post("/quiz", {
+  //       moduleId: form.moduleId,
+  //       questions: form.questions,
+  //     });
+
+  //     alert(editingQuiz ? "Quiz updated!" : "Quiz created!");
+  //     closeModal();
+  //     window.location.reload(); // Refresh list
+  //   } catch (err) {
+  //     alert(err.response?.data?.message || "Save failed");
+  //   }
+  // };
   const handleSave = async () => {
-    if (!form.moduleId) return alert("Please select a module");
+  // 1. Module check
+  if (!form.moduleId) {
+    return alert("Please select a module");
+  }
 
-    try {
-      await api.post("/quiz", {
-        moduleId: form.moduleId,
-        questions: form.questions,
-      });
+  // 2. Questions validation
+  if (!form.questions.length) {
+    return alert("At least one question is required");
+  }
 
-      alert(editingQuiz ? "Quiz updated!" : "Quiz created!");
-      closeModal();
-      window.location.reload(); // Refresh list
-    } catch (err) {
-      alert(err.response?.data?.message || "Save failed");
+  for (let i = 0; i < form.questions.length; i++) {
+    const q = form.questions[i];
+
+    // Question text
+    if (!q.question.trim()) {
+      return alert(`Question ${i + 1} cannot be empty`);
     }
-  };
+
+    // Options validation
+    const emptyOption = q.options.find(opt => !opt.trim());
+    if (emptyOption !== undefined) {
+      return alert(`All options must be filled for Question ${i + 1}`);
+    }
+
+    // Correct answer index
+    if (
+      q.correct === undefined ||
+      q.correct === null ||
+      q.correct < 0 ||
+      q.correct > 3
+    ) {
+      return alert(`Please select a correct option for Question ${i + 1}`);
+    }
+  }
+
+  // 3. Save only if valid
+  try {
+    await api.post("/quiz", {
+      moduleId: form.moduleId,
+      questions: form.questions,
+    });
+
+    alert(editingQuiz ? "Quiz updated!" : "Quiz created!");
+    closeModal();
+    window.location.reload();
+  } catch (err) {
+    alert(err.response?.data?.message || "Save failed");
+  }
+};
+
 
   const handleDelete = async (moduleId) => {
     if (!confirm("Delete all questions for this module?")) return;

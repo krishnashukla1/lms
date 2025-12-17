@@ -142,7 +142,7 @@ export default function ModuleEdit() {
       <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
         <div className="text-center">
           <div className="w-20 h-20 bg-red-100 rounded-3xl flex items-center justify-center mx-auto mb-4">
-            <FiAlertCircle className="text-red-500" size={40} />
+            <FiAlertCircle className="text-red-500" size={30} />
           </div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Error Loading Module</h2>
           <p className="text-gray-600 mb-6">{error}</p>
@@ -174,7 +174,7 @@ export default function ModuleEdit() {
             Back to Modules
           </button>
 
-          <div className="w-20 h-20 bg-linear-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl">
+          <div className="w-16 h-15 bg-linear-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl">
             <FiEdit3 className="text-white" size={36} />
           </div>
         </div>
@@ -183,21 +183,21 @@ export default function ModuleEdit() {
         <div className="bg-white/80 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden">
           <div className="p-10">
             {/* Title Section */}
-            <div className="text-center mb-10">
-              <div className="inline-flex items-center gap-3 bg-blue-100 text-blue-700 px-6 py-3 rounded-full text-lg font-bold mb-6">
+            <div className="text-center mb-5">
+              <div className="inline-flex items-center gap-3 bg-blue-100 text-blue-700 px-6 py-3 rounded-full text-lg font-bold mb-2">
                 <FiBook size={22} />
                 Editing Module #{moduleData?.order || "N/A"}
               </div>
-              <h1 className="text-5xl font-black bg-linear-to-r from-blue-600 to-purple-700 bg-clip-text text-transparent mb-4">
+              <h1 className="text-5xl font-black bg-linear-to-r from-blue-600 to-purple-700 bg-clip-text text-transparent mb-2">
                 Edit Learning Module
               </h1>
-              <p className="text-gray-600 text-lg font-medium">Update title, description, order, and learning materials</p>
+              <p className="text-gray-600 text-lg font-medium ">Update title, description, order, and learning materials</p>
             </div>
 
             {/* Current Module Info */}
             {moduleData && (
-              <div className="bg-linear-to-r from-blue-50 to-purple-50 rounded-3xl p-8 mb-10 border border-blue-200/50 shadow-lg">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div className="bg-linear-to-r from-blue-50 to-purple-50 rounded-3xl p-4 mb-8 border border-blue-200/50 shadow-lg">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-center">
                   <div>
                     <p className="text-gray-600 font-medium">Current Title</p>
                     <p className="text-2xl font-black text-gray-800 mt-1">{moduleData.title}</p>
