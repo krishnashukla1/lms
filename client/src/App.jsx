@@ -716,7 +716,7 @@ import StudentList from "./components/StudentList";
 import AddModule from "./components/AddModule";
 import ModuleList from "./components/ModuleList";
 import ModuleDetail from './pages/ModuleDetail'
-import EditModule from './components/moduleEdit'
+import EditModule from './components/ModuleEdit'
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import CourseScoresPage from './pages/CourseScoresPage'

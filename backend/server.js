@@ -27,8 +27,7 @@ app.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:5173",       //  local frontend
-  "https://learnstep.netlify.app", //  deployed frontend,
-  "https://learnstep.onrender.com"
+  "https://learn-step.onrender.com"  //  deployed frontend,
 ];
 
 app.use(cors({
