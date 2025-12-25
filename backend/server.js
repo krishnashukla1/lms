@@ -15,6 +15,8 @@ import finalAssignmentRoutes from './routes/finalAssignmentRoutes.js'
 
 import enrollmentRoutes from "./routes/enrollmentRoutes.js";
 import finalExamRoutes from './routes/finalExamRoutes.js'
+import notificationRoutes from "./routes/NotificationRoutes.js";
+
 import "./models/Student.js";
 
 dotenv.config();
@@ -63,6 +65,7 @@ app.use("/api/query", queryRoutes);
 app.use("/api/final-assignments", finalAssignmentRoutes);
 app.use("/api/enrollments", enrollmentRoutes);
 app.use("/api/final-exams", finalExamRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}`)
@@ -71,3 +74,4 @@ app.listen(process.env.PORT, () =>
 
 
 //   PS C:\Users\hp\Desktop\LMS NEW PROJECT> git commit -m "Remove .env files from repository and ignore them"
+// lms on postman check also 
