@@ -1,4 +1,185 @@
 
+// import { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { useAuth } from "../store/authStore";
+// import api from "../api/axios";
+// import { FiMenu, FiX, FiLogOut, FiUsers, FiBook, FiFileText, FiBarChart2,FiSettings,FiLifeBuoy,FiTrendingUp } from "react-icons/fi";
+
+// export default function AdminDashboard() {
+//   const navigate = useNavigate();
+//   const logout = useAuth(s => s.logout);
+//   const [sidebarOpen, setSidebarOpen] = useState(false);
+//   const [stats, setStats] = useState({ students: 0, modules: 0, lessons: 0 });
+
+//   useEffect(() => {
+//     const fetchStats = async () => {
+//       try {
+//         const [stdRes, modRes] = await Promise.all([
+//           api.get("/admin/students"),
+//           api.get("/modules")
+//         ]);
+//         const students = stdRes.data.students?.length || 0;
+//         const modules = modRes.data?.length || 0;
+//         const lessons = modRes.data?.reduce((a, m) => a + (m.materials?.length || 0), 0) || 0;
+//         setStats({ students, modules, lessons });
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     };
+//     fetchStats();
+//   }, []);
+
+//   const menuItems = [
+//     { label: "Add Student", icon: FiUsers, path: "/admin/add-student" },
+//     { label: "Student List", icon: FiUsers, path: "/admin/students" },
+//     { label: "Student Enrollment", icon: FiBarChart2, path: "/admin/enrollment" },
+
+//     { label: "Add Module", icon: FiBook, path: "/admin/add-module" },
+//     { label: "Module List", icon: FiBook, path: "/admin/modules" },
+//     { label: "Quiz Management", icon: FiFileText, path: "/admin/quiz" },
+//     { label: "Assignment & Progress", icon: FiTrendingUp, path: "/admin/assignment-progress" },
+
+//     // { label: "Student Enrollment", icon: FiBarChart2, path: "/admin/enrollment" },
+//     { label: "Final Exam", icon: FiBarChart2, path: "/admin/final-exam" },
+
+//     { label: "Settings", icon: FiSettings, path: "/admin/settings" },
+//     // { label: "Analytics", icon: FiBarChart2, path: "/admin/analytics" },
+//     // { label: "Support", icon: FiLifeBuoy, path: "/admin/support" },
+
+//   ];
+
+//   const quickCards = [
+//     { title: "Students", value: stats.students, color: "blue", icon: FiUsers },
+//     { title: "Modules", value: stats.modules, color: "emerald", icon: FiBook },
+//     { title: "Lessons", value: stats.lessons, color: "purple", icon: FiFileText },
+//   ];
+
+//   return (
+//     <div className="min-h-screen bg-linear-to-br from-slate-50 to-indigo-50">
+//       {/* Sidebar */}
+//       <div className={`fixed inset-y-0 left-0 w-72 bg-white shadow-2xl transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 transition-transform duration-300 ease-in-out z-50`}>
+//         <div className="p-6 flex justify-between items-center">
+//           <h1 className="text-3xl font-bold text-indigo-700">Admin Panel</h1>
+//           <button
+//             onClick={() => setSidebarOpen(false)}
+//             className="lg:hidden text-indigo-700"
+//           >
+//             <FiX size={24} />
+//           </button>
+//         </div>
+//         <nav className="mt-10">
+//           {menuItems.map(item => (
+//             <button
+//               key={item.path}
+//               onClick={() => {
+//                 navigate(item.path);
+//                 setSidebarOpen(false);
+//               }}
+//               className="cursor-pointer w-full text-left px-8 py-4 hover:bg-indigo-50 flex items-center gap-4 text-lg font-medium text-indigo-800 transition-colors duration-200"
+//             >
+//               <item.icon size={20} />
+//               {item.label}
+//             </button>
+//           ))}
+//           <button
+//             onClick={logout}
+//             className="cursor-pointer w-full text-left px-8 py-4 hover:bg-red-100 flex items-center gap-4 text-lg font-medium text-red-600 transition-colors duration-200 mt-auto"
+//           >
+//             <FiLogOut size={20} />
+//             Logout
+//           </button>
+//         </nav>
+//       </div>
+
+//       {/* Overlay for mobile sidebar */}
+//       {sidebarOpen && (
+//         <div
+//           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+//           onClick={() => setSidebarOpen(false)}
+//         />
+//       )}
+
+//       {/* Main Content */}
+//       <div className="lg:ml-72 p-8 bg-amber-50">
+//         {/* Mobile Menu Button */}
+//         <button
+//           onClick={() => setSidebarOpen(true)}
+//           className="lg:hidden fixed top-4 left-4 z-40 bg-white p-3 rounded-xl shadow-lg"
+//         >
+//           <FiMenu size={24} />
+//         </button>
+//         <h1 className="text-5xl font-black text-center mb-12 bg-linear-to-r from-indigo-600 to-purple-700 bg-clip-text text-transparent">
+//           Welcome, Admin!
+//         </h1>
+//         {/* Stats */}
+//         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+//           {quickCards.map((card, i) => (
+//             <div
+//               key={i}
+//               className={`bg-linear-to-br from-${card.color}-500 to-${card.color}-700 text-white p-8 rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 transform`}
+//             >
+//               <card.icon className="text-5xl mb-4 opacity-90" />
+//               <p className="text-5xl font-black">{card.value}</p>
+//               <p className="text-xl mt-2 opacity-90">{card.title}</p>
+//             </div>
+//           ))}
+//         </div>
+//         {/* Quick Actions */}
+// <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 mt-5 mb-5">
+//   Course Management Center
+// </h1>
+
+
+
+//         <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+//   {menuItems.slice(0, 10).map((item, i) => {
+//  const colors = [
+//   "from-pink-500 to-red-500",
+//   "from-indigo-500 to-purple-500",
+//   "from-green-400 to-emerald-500",
+//   "from-yellow-400 to-orange-500",
+//   "from-cyan-400 to-blue-500",
+//   "from-purple-400 to-pink-500",
+//   "from-rose-400 to-fuchsia-500",
+//   "from-lime-400 to-emerald-500",
+
+//   // ⭐ New Unique Colors
+//   "from-sky-400 to-blue-600",
+//   "from-amber-400 to-red-500"
+// ];
+
+
+//     const gradient = colors[i % colors.length];
+
+//     return (
+//       <button
+//         key={i}
+//         onClick={() => navigate(item.path)}
+//         className={`relative overflow-hidden p-6 rounded-2xl shadow-xl flex flex-col items-start text-left cursor-pointer
+//                     transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-linear-to-br ${gradient}`}
+//       >
+//         {/* Icon */}
+//         <item.icon className="text-4xl mb-4 text-white" />
+//         {/* Label */}
+//         <p className="font-bold text-lg text-white">{item.label}</p>
+
+//         {/* Decorative Circle */}
+//         <div className="absolute -top-5 -right-5 w-16 h-16 bg-white opacity-10 rounded-full"></div>
+//       </button>
+//     );
+//   })}
+// </div>
+
+//       </div>
+//     </div>
+//   );
+// }
+
+//=========================with notifiction=========
+
+
+
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/authStore";
@@ -41,6 +222,8 @@ export default function AdminDashboard() {
 
     // { label: "Student Enrollment", icon: FiBarChart2, path: "/admin/enrollment" },
     { label: "Final Exam", icon: FiBarChart2, path: "/admin/final-exam" },
+    { label: "Notification", icon: FiBarChart2, path: "/admin/notification" },
+
 
     { label: "Settings", icon: FiSettings, path: "/admin/settings" },
     // { label: "Analytics", icon: FiBarChart2, path: "/admin/analytics" },
@@ -100,7 +283,9 @@ export default function AdminDashboard() {
       )}
 
       {/* Main Content */}
-      <div className="lg:ml-72 p-8 bg-amber-50">
+      {/* <div className="lg:ml-72 p-8 bg-amber-50 h-250"> */}
+        <div className="lg:ml-72 p-8 bg-amber-50 min-h-screen">
+
         {/* Mobile Menu Button */}
         <button
           onClick={() => setSidebarOpen(true)}
@@ -131,7 +316,7 @@ export default function AdminDashboard() {
 
 
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
   {menuItems.slice(0, 10).map((item, i) => {
  const colors = [
   "from-pink-500 to-red-500",
@@ -155,7 +340,7 @@ export default function AdminDashboard() {
       <button
         key={i}
         onClick={() => navigate(item.path)}
-        className={`relative overflow-hidden p-6 rounded-2xl shadow-xl flex flex-col items-start text-left cursor-pointer
+        className={` relative overflow-hidden p-6 rounded-2xl shadow-xl flex flex-col items-start text-left cursor-pointer
                     transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl bg-linear-to-br ${gradient}`}
       >
         {/* Icon */}
@@ -174,6 +359,8 @@ export default function AdminDashboard() {
     </div>
   );
 }
+
+
 
 
 
