@@ -9,10 +9,10 @@ const FROM_EMAIL = "onboarding@resend.dev";
 const ADMIN_EMAIL = "krishnaprasad24795@gmail.com";
 
 export async function sendQuery(req, res) {
-  const { name, email, message } = req.body;
+  const { name, phone,email, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ error: "Name, email and message are required" });
+    return res.status(400).json({ error: "Name, phone number, email and message are required" });
   }
 
   try {
@@ -63,6 +63,12 @@ export async function sendQuery(req, res) {
           <td style="padding: 8px 0;">${name}</td>
         </tr>
 
+        
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold;">Phone:</td>
+        <td style="padding: 8px 0;">${phone}</td>
+      </tr>
+      
         <tr>
           <td style="padding: 8px 0; font-weight: bold;">Email:</td>
           <td style="padding: 8px 0;">${email}</td>
