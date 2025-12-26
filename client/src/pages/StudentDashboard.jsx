@@ -520,6 +520,12 @@ export default function StudentDashboard() {
     fetchData();
   }, []);
 
+  const NEW_WINDOW = 24 * 60 * 60 * 1000;
+
+  const newNotifications = notifications.filter(
+    (n) => Date.now() - new Date(n.createdAt) <= NEW_WINDOW
+  );
+
   // COURSE LABELS
   const courses = {
     basic: { line1: "Basic", line2: "Course" },
@@ -646,6 +652,20 @@ export default function StudentDashboard() {
           >
             <FiBell size={56} className="mx-auto mb-5 drop-shadow-lg" />
             <p className="text-6xl font-black mb-2">{notifications.length}</p>
+
+
+
+            {newNotifications.length > 0 && (
+              <span className="absolute top-6 right-6 bg-red-600 text-white text-sm px-3 py-1 rounded-full">
+                {newNotifications.length} New
+              </span>
+            )}
+            {notifications.length === 0 && (
+              <p className="text-white italic text-center">
+                No recent notifications
+              </p>
+            )}
+
             <p className="text-2xl font-bold">Notifications</p>
           </motion.div>
         </div>
@@ -687,10 +707,9 @@ export default function StudentDashboard() {
                   bg-white/90 backdrop-blur-lg 
                   rounded-3xl shadow-xl p-10 text-center 
                   transition-all duration-500 group
-                  ${
-                    isEnrolled
-                      ? "hover:shadow-3xl hover:bg-indigo-50 hover:ring-4 hover:ring-indigo-300/40"
-                      : "opacity-60 cursor-not-allowed"
+                  ${isEnrolled
+                    ? "hover:shadow-3xl hover:bg-indigo-50 hover:ring-4 hover:ring-indigo-300/40"
+                    : "opacity-60 cursor-not-allowed"
                   }
                 `}
               >
@@ -708,10 +727,9 @@ export default function StudentDashboard() {
                   <div
                     className={`
                       inline-block px-5 py-2 rounded-full text-lg font-bold
-                      ${
-                        isEnrolled
-                          ? "bg-emerald-100 text-emerald-600"
-                          : "bg-gray-200 text-gray-500"
+                      ${isEnrolled
+                        ? "bg-emerald-100 text-emerald-600"
+                        : "bg-gray-200 text-gray-500"
                       }
                     `}
                   >
@@ -722,10 +740,9 @@ export default function StudentDashboard() {
                     <FiFileText className="text-indigo-600" size={28} />
                     <span
                       className={`text-lg font-bold 
-                        ${
-                          !isEnrolled
-                            ? "text-gray-400"
-                            : assignmentDone
+                        ${!isEnrolled
+                          ? "text-gray-400"
+                          : assignmentDone
                             ? "text-emerald-600"
                             : "text-orange-600"
                         }`}
@@ -733,23 +750,22 @@ export default function StudentDashboard() {
                       {!isEnrolled
                         ? "Assignment: Not Submitted"
                         : assignmentDone
-                        ? "Assignment: Submitted"
-                        : "Assignment: Not Submitted"}
+                          ? "Assignment: Submitted"
+                          : "Assignment: Not Submitted"}
                     </span>
                   </div>
 
                   <div className="flex justify-center items-center gap-3">
                     <FiBookOpen className="text-purple-600" size={30} />
                     <span
-                      className={`text-xl font-black ${
-                        exam.color === "emerald"
+                      className={`text-xl font-black ${exam.color === "emerald"
                           ? "text-emerald-600"
                           : exam.color === "red"
-                          ? "text-red-600"
-                          : exam.color === "amber"
-                          ? "text-amber-600"
-                          : "text-gray-600"
-                      }`}
+                            ? "text-red-600"
+                            : exam.color === "amber"
+                              ? "text-amber-600"
+                              : "text-gray-600"
+                        }`}
                     >
                       {exam.text}
                     </span>
@@ -791,10 +807,9 @@ export default function StudentDashboard() {
                       className={`
                         w-full mt-5 py-4 rounded-2xl font-bold text-xl text-white
                         transition-all duration-300 cursor-pointer
-                        ${
-                          isExpired
-                            ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:shadow-xl hover:from-indigo-700 hover:to-purple-700"
+                        ${isExpired
+                          ? "bg-gray-400 cursor-not-allowed"
+                          : "bg-gradient-to-r from-indigo-600 to-purple-600 hover:shadow-xl hover:from-indigo-700 hover:to-purple-700"
                         }
                       `}
                     >

@@ -16,6 +16,10 @@ const finalExamSchema = new mongoose.Schema(
         correct: { type: Number, required: true },
       },
     ],
+      durationMinutes: {
+    type: Number,
+    default: 60, // backend authority
+  },
   },
   { timestamps: true }
 );

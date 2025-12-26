@@ -85,50 +85,144 @@ export const getExamForStudent = async (req, res) => {
 };
 
 // STUDENT: Submit answers
+// export const submitExamAnswers = async (req, res) => {
+//   if (req.role !== "student") return res.status(403).json({ message: "Students only" });
+
+//   const { courseType } = req.params;
+//   const { answers } = req.body; // array of { questionIndex: 0, selectedOption: 2 }
+
+//   const exam = await FinalExam.findOne({ courseType });
+//   if (!exam) return res.status(404).json({ message: "Exam not found" });
+
+//   // Check if already submitted
+//   const existing = await FinalExamAttempt.findOne({
+//     student: req.user._id,
+//     courseType,
+//   });
+//   if (existing) return res.status(400).json({ message: "Already submitted" });
+
+//   let correctCount = 0;
+//   answers.forEach((ans) => {
+//     if (exam.questions[ans.questionIndex]?.correct === ans.selectedOption) {
+//       correctCount++;
+//     }
+//   });
+
+//   const score = Math.round((correctCount / exam.questions.length) * 100);
+//   const passed = score >= 70; // 70% to pass
+
+//   await FinalExamAttempt.create({
+//     student: req.user._id,
+//     courseType,
+//     answers,
+//     score,
+//     totalQuestions: exam.questions.length,
+//     passed,
+//   });
+
+//   res.json({
+//     message: "Exam submitted successfully!",
+//     score,
+//     total: exam.questions.length,
+//     correct: correctCount,
+//     passed,
+//     percentage: score + "%",
+//   });
+// };
+
+
 export const submitExamAnswers = async (req, res) => {
-  if (req.role !== "student") return res.status(403).json({ message: "Students only" });
-
-  const { courseType } = req.params;
-  const { answers } = req.body; // array of { questionIndex: 0, selectedOption: 2 }
-
-  const exam = await FinalExam.findOne({ courseType });
-  if (!exam) return res.status(404).json({ message: "Exam not found" });
-
-  // Check if already submitted
-  const existing = await FinalExamAttempt.findOne({
-    student: req.user._id,
-    courseType,
-  });
-  if (existing) return res.status(400).json({ message: "Already submitted" });
-
-  let correctCount = 0;
-  answers.forEach((ans) => {
-    if (exam.questions[ans.questionIndex]?.correct === ans.selectedOption) {
-      correctCount++;
+  try {
+    if (req.role !== "student") {
+      return res.status(403).json({ message: "Access denied: Students only" });
     }
-  });
 
-  const score = Math.round((correctCount / exam.questions.length) * 100);
-  const passed = score >= 70; // 70% to pass
+    const { courseType } = req.params;
+    const { answers, timeUp = false } = req.body; // answers: [{ questionIndex, selectedOption }]
 
-  await FinalExamAttempt.create({
-    student: req.user._id,
-    courseType,
-    answers,
-    score,
-    totalQuestions: exam.questions.length,
-    passed,
-  });
+    // Validate input
+    if (!Array.isArray(answers)) {
+      return res.status(400).json({ message: "Invalid answers format" });
+    }
 
-  res.json({
-    message: "Exam submitted successfully!",
-    score,
-    total: exam.questions.length,
-    correct: correctCount,
-    passed,
-    percentage: score + "%",
-  });
+    // Find the exam
+    const exam = await FinalExam.findOne({ courseType });
+    if (!exam) {
+      return res.status(404).json({ message: "Exam not found for this course" });
+    }
+
+    // Prevent double submission
+    const existingAttempt = await FinalExamAttempt.findOne({
+      student: req.user._id,
+      courseType,
+    });
+
+    if (existingAttempt) {
+      return res.status(400).json({ message: "You have already submitted this exam" });
+    }
+
+    // Calculate score safely
+    let correctCount = 0;
+    const totalQuestions = exam.questions.length;
+
+    for (const ans of answers) {
+      const questionIndex = ans.questionIndex;
+      const selected = ans.selectedOption;
+
+      // Safety checks
+      if (
+        questionIndex == null || 
+        questionIndex < 0 || 
+        questionIndex >= totalQuestions
+      ) {
+        continue; // skip invalid index
+      }
+
+      const question = exam.questions[questionIndex];
+
+      // Ensure question has correct answer defined
+      if (question && typeof question.correct === "number") {
+        if (selected === question.correct) {
+          correctCount++;
+        }
+        // Note: if selected === null → treated as wrong (good!)
+      }
+    }
+
+    const score = Math.round((correctCount / totalQuestions) * 100);
+    const passed = score >= 70;
+
+    // Save attempt
+    await FinalExamAttempt.create({
+      student: req.user._id,
+      courseType,
+      answers, // store full answers for review
+      score,
+      correct: correctCount,
+      totalQuestions,
+      passed,
+      submittedAt: new Date(),
+      timeUp, // optional: flag if auto-submitted due to time
+    });
+
+    // Success response
+    return res.json({
+      score,
+      correct: correctCount,
+      total: totalQuestions,
+      passed,
+      message: passed ? "Congratulations! You passed the exam 🎉" : "Exam submitted. Better luck next time.",
+    });
+
+  } catch (error) {
+    console.error("Submit Exam Error:", error);
+    return res.status(500).json({ 
+      message: "Server error during submission",
+      error: error.message 
+    });
+  }
 };
+
 
 // STUDENT: Get my exam results
 export const getStudentResults = async (req, res) => {
