@@ -167,9 +167,12 @@ export default function AdminEnrollments() {
                   </td> */}
 
                   <td className="p-4 font-medium">
-                    {en.duration === "3m" && "3 Months"}
+                    {/* {en.duration === "3m" && "3 Months"}
                     {en.duration === "6m" && "6 Months"}
-                    {en.duration === "1y" && "1 Year"}
+                    {en.duration === "1y" && "1 Year"} */}
+                       {en.duration === "6m" && "6 Months"}
+                    {en.duration === "9m" && "9 Months"}
+                    {en.duration === "12m" && "12 Months"}
                     {!en.duration && "-"}
                   </td>
                   <td className="p-4">

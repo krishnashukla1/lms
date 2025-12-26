@@ -11,11 +11,16 @@ const enrollmentSchema = new mongoose.Schema({
     enum: ["basic", "intermediate", "advanced"],
     required: true,
   },
-  duration: {
-    type: String,
-    enum: ["3m", "6m", "1y"],
-    default: "1y",
-  },
+  // duration: {
+  //   type: String,
+  //   enum: ["3m", "6m", "1y"],
+  //   default: "1y",
+  // },
+   duration: {
+  type: String,
+  enum: ["6m", "9m", "12m", "1y"], // keep temporarily
+  default: "12m",
+},
   enrolledAt: {
     type: Date,
     default: Date.now,

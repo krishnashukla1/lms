@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import { format, addMonths, addYears } from "date-fns";
 
 const durationOptions = [
-  { value: "3m", label: "3 Months" },
-  { value: "6m", label: "6 Months" },
-  { value: "1y", label: "1 Year" },
+ { value: "6m", label: "6 Months" },
+  { value: "9m", label: "9 Months" },
+  { value: "12m", label: "12 Months" },
 ];
 
 export default function EnrollmentFormModal({
@@ -28,8 +28,8 @@ export default function EnrollmentFormModal({
       : new Date();
 
     let expires;
-    if (selected.duration === "3m") expires = addMonths(baseDate, 3);
-    else if (selected.duration === "6m") expires = addMonths(baseDate, 6);
+    if (selected.duration === "6m") expires = addMonths(baseDate, 6);
+    else if (selected.duration === "9m") expires = addMonths(baseDate, 9);
     else expires = addYears(baseDate, 1);
 
     setSelected((prev) => ({

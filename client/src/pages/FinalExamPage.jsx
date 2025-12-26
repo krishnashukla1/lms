@@ -150,8 +150,9 @@ import { useState, useEffect, useRef } from "react";
 import api from "../api/axios";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { FiAward, FiCheckCircle, FiArrowLeft, FiClock } from "react-icons/fi";
+import { FiAward, FiCheckCircle, FiArrowLeft, FiClock ,FiLogOut} from "react-icons/fi";
 import { motion } from "framer-motion";
+import { useAuth } from "../store/authStore";
 
 export default function FinalExamPage() {
   const { courseType } = useParams();
@@ -166,6 +167,8 @@ export default function FinalExamPage() {
   const [timeLeft, setTimeLeft] = useState(60 * 60); // 60 minutes in seconds
 
   const timerRef = useRef(null);
+  const { logout } = useAuth();
+
 
   useEffect(() => {
     const loadExam = async () => {
@@ -294,12 +297,25 @@ export default function FinalExamPage() {
           <p className="text-xl text-gray-600 mb-8">
             Correct: {result.correct}/{result.total}
           </p>
-          <button
+          {/* <button
             onClick={() => navigate(`/modules/${courseType}`)}
             className="bg-emerald-600 text-white px-12 py-4 rounded-3xl text-xl font-bold shadow-xl hover:bg-emerald-700"
           >
             Back to Course
-          </button>
+          </button> */}
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => {
+                logout();
+                toast.success("Logged out");
+                navigate("/");
+              }}
+              className="cursor-pointer bg-red-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center gap-3 shadow-md hover:bg-red-700 hover:shadow-lg transition-all duration-200"
+            >
+              <FiLogOut className="text-xl" />
+              Logout
+            </button>
+          </div>
         </div>
       </motion.div>
     );
@@ -350,20 +366,20 @@ export default function FinalExamPage() {
           <div className="text-center">
             <button
               onClick={startExam}
-              className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white px-20 py-6 rounded-3xl text-3xl font-black shadow-2xl hover:shadow-3xl"
+              className="cursor-pointer bg-gradient-to-r from-purple-600 to-indigo-700 text-white px-20 py-6 rounded-3xl text-3xl font-black shadow-2xl hover:shadow-3xl"
             >
               START EXAM
             </button>
           </div>
 
-          <div className="mt-10 text-center">
+          {/* <div className="mt-10 text-center">
             <button
               onClick={() => navigate(`/modules/${courseType}`)}
-              className="text-indigo-700 font-bold text-xl hover:text-indigo-900 flex items-center gap-3 mx-auto"
+              className="cursor-pointer text-indigo-700 font-bold text-xl hover:text-indigo-900 flex items-center gap-3 mx-auto"
             >
               <FiArrowLeft size={28} /> Back to Course
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     );
@@ -430,7 +446,7 @@ export default function FinalExamPage() {
         <div className="text-center">
           <button
             onClick={handleSubmit}
-            className="bg-gradient-to-r from-purple-600 to-indigo-700 text-white px-20 py-5 rounded-3xl text-3xl font-black shadow-2xl hover:shadow-3xl"
+            className="cursor-pointer bg-gradient-to-r from-purple-600 to-indigo-700 text-white px-20 py-5 rounded-3xl text-3xl font-black shadow-2xl hover:shadow-3xl"
           >
             Submit Final Exam
           </button>

@@ -387,7 +387,9 @@ export default function CourseModules() {
               </motion.button>
             )}
             {/* <p>Green if score ≥ 50 &nbsp; | &nbsp; Red if score &lt; 50</p> */}
-
+ <p className="text-sm font-medium text-red-600 mt-4">
+              Once you click “Start Exam”, you cannot go back, refresh, or exit the exam screen.
+            </p>
           </motion.div>
 
           {/* View Scores Card */}

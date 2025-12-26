@@ -430,20 +430,39 @@ const getExpiresDate = (enrolledAt, duration) => {
   const start = new Date(enrolledAt);
   const d = new Date(start);
 
-  switch (duration) {
-    case "3m":
-      d.setMonth(d.getMonth() + 3);
-      break;
-    case "6m":
-      d.setMonth(d.getMonth() + 6);
-      break;
-    case "1y":
-      d.setFullYear(d.getFullYear() + 1);
-      break;
-    default:
-      d.setFullYear(d.getFullYear() + 1);
-      break;
-  }
+  // switch (duration) {
+  //   case "3m":
+  //     d.setMonth(d.getMonth() + 3);
+  //     break;
+  //   case "6m":
+  //     d.setMonth(d.getMonth() + 6);
+  //     break;
+  //   case "1y":
+  //     d.setFullYear(d.getFullYear() + 1);
+  //     break;
+  //   default:
+  //     d.setFullYear(d.getFullYear() + 1);
+  //     break;
+  // }
+
+   switch (duration) {
+  case "6m":
+    d.setMonth(d.getMonth() + 6);
+    break;
+
+  case "9m":
+    d.setMonth(d.getMonth() + 9);
+    break;
+
+  case "12m":
+    d.setMonth(d.getMonth() + 12);
+    break;
+
+  default:
+    // Default = 12 months
+    d.setMonth(d.getMonth() + 12);
+    break;
+}
 
   // Fix end-of-month overflow
   if (d.getDate() !== start.getDate()) {
@@ -459,9 +478,15 @@ const calculateDurationFromDates = (enrolledAt, expiresAt) => {
   const diffMs = new Date(expiresAt) - new Date(enrolledAt);
   const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
 
-  if (diffDays <= 90) return "3m";
-  if (diffDays <= 180) return "6m";
-  if (diffDays <= 380) return "1y";
+  // if (diffDays <= 90) return "3m";
+  // if (diffDays <= 180) return "6m";
+  // if (diffDays <= 380) return "1y";
+ 
+   if (diffDays <= 180) return "6m";   // up to ~6 months
+if (diffDays <= 270) return "9m";   // up to ~9 months
+return "12m";                       // default ~12 months
+
+ 
   return `${diffDays}d`; // fallback
 };
 
