@@ -58,3 +58,6 @@ desktop.ini
 # Others
 *.tgz
 *.zip
+
+# Screenshots
+SCREENSHOT/

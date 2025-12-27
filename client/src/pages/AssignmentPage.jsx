@@ -187,12 +187,17 @@ export default function AssignmentPage() {
   const courseType =
     location.state?.courseType || params.courseType || "basic";
 
-  const courseNames = {
-    basic: "Basic Web Development",
-    intermediate: "Intermediate JavaScript",
-    advanced: "Full Stack Mastery",
-  };
+  // const courseNames = {
+  //   basic: "Basic Web Development",
+  //   intermediate: "Intermediate JavaScript",
+  //   advanced: "Full Stack Mastery",
+  // };
 
+   const courseNames = {
+  basic: "Basic Level",
+  intermediate: "Intermediate Level",
+  advanced: "Advanced Level",
+};
   useEffect(() => {
     const checkSubmissionStatus = async () => {
       try {

@@ -139,11 +139,17 @@ export default function CourseScoresPage() {
   const [studentName, setStudentName] = useState("");
   const [generatingPDF, setGeneratingPDF] = useState(false);
 
+  // const courseNames = {
+  //   basic: "Basic Web Development",
+  //   intermediate: "Intermediate JavaScript",
+  //   advanced: "Full Stack Mastery",
+  // };
+
   const courseNames = {
-    basic: "Basic Web Development",
-    intermediate: "Intermediate JavaScript",
-    advanced: "Full Stack Mastery",
-  };
+  basic: "Basic Level",
+  intermediate: "Intermediate Level",
+  advanced: "Advanced Level",
+};
 
   useEffect(() => {
     const fetchAllScores = async () => {

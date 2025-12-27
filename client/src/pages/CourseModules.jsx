@@ -32,12 +32,18 @@ export default function CourseModules() {
 
   const highlightModuleId = location.state?.highlightModuleId;
 
-  const courseNames = {
-    basic: "Basic Web Development",
-    intermediate: "Intermediate JavaScript",
-    advanced: "Full Stack Mastery",
-  };
+  // const courseNames = {
+  //   basic: "Basic Web Development",
+  //   intermediate: "Intermediate JavaScript",
+  //   advanced: "Full Stack Mastery",
+  // };
 
+    const courseNames = {
+  basic: "Basic Level",
+  intermediate: "Intermediate Level",
+  advanced: "Advanced Level",
+};
+ 
   useEffect(() => {
     const fetchCourseData = async () => {
       if (!courseType) return;
